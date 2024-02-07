@@ -1,0 +1,62 @@
+.form-inputs {
+	padding: 3rem 1.5rem;
+	z-index: 1000000;
+}
+
+.form-input {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	color: var(--very-dark);
+	letter-spacing: 1px;
+	font-weight: bold;
+}
+
+.label {
+	margin-bottom: 0.5rem;
+	color: black;
+}
+
+.input {
+	padding: 0.5rem;
+	border: 2px solid var(--light-gray);
+	border-radius: 5px;
+	outline: none;
+}
+
+.input::placeholder {
+	color: var(--dark-gray);
+}
+
+.input:focus {
+	border: 2px solid var(--dark-gray);
+}
+
+.about-card {
+	display: flex;
+}
+
+.exp {
+	display: flex;
+}
+
+.exp-input {
+	margin-right: 1rem;
+	width: 35%;
+}
+
+.cvc {
+	margin-left: -1.5rem;
+	width: 100%;
+}
+
+.cvc-input {
+	width: 100%;
+}
+
+.button {
+	display: flex;
+	justify-content: center;
+}

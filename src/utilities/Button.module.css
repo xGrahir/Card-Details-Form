@@ -1,0 +1,17 @@
+button {
+	margin-top: 1rem;
+	padding: 1rem 0;
+	width: 100%;
+	border: none;
+	border-radius: 8px;
+	background-color: var(--very-dark);
+	color: var(--white);
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+
+button:hover {
+	background-color: hsl(278, 65%, 30%);
+}
