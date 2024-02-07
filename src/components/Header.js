@@ -19,7 +19,7 @@ export const Header = () => {
 				<div className={`${styles['front-card']} ${styles['card-img']}`}>
 					<div className={styles['card-bg']}>
 						<div className={styles['card-logo']}></div>
-						<div className={styles.number}>0000 0000 0000 0000</div>
+						<div className={styles.number}>{data.cardnumber}</div>
 						<div className={styles.name}>{data.name}</div>
 						<div className={styles.year}>00/00</div>
 					</div>

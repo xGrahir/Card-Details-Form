@@ -7,18 +7,40 @@ export const useValidateForm = () => {
 	const data = useSelector(state => state)
 
 	const [isTouched, setIsTouched] = useState(false)
-	const [nameValid, setNameValid] = useState(false)
+	const [isValid, setIsValid] = useState(false)
 
 	const checkNameValid = e => {
 		const reg = /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/gm
 
 		if (e.target.value.match(reg)) {
-			setNameValid(true)
+			setIsValid(true)
+		} else {
+			setIsValid(false)
+		}
 
-			dispatch(dataActions.changeName(e.target.value))
-			console.log(data)
+		setIsTouched(true)
+		dispatch(dataActions.changeName(e.target.value))
+	}
+
+	const checkCardNumberHandler = e => {
+		const reg = /^(?:\d[ -]*?){16}$/
+
+		const format = e.target.value.replaceAll(' ', '').replace(/(\w{4})/g, '$1 ').replace(/(^\s+|\s+$)/, '')
+
+		if (e.target.value.match(reg)) {
+			setIsValid(true)
+		} else {
+			setIsValid(false)
+		}
+
+		if (e.target.value.replaceAll(' ', '').length <= 16) {
+			dispatch(dataActions.changeCardNumber(format))
 		}
 	}
 
-	return [checkNameValid]
+	const isTouchedHandler = () => {
+		setIsTouched(true)
+	}
+
+	return { checkNameValid, isTouchedHandler, isTouched, isValid, checkCardNumberHandler }
 }

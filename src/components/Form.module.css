@@ -34,6 +34,17 @@
 	border: 2px solid var(--dark-gray);
 }
 
+.error {
+	border: 2px solid rgba(255, 0, 0, 0.248);
+}
+
+.errormsg {
+	color: red;
+	font-size: 0.7rem;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
 .about-card {
 	display: flex;
 }
