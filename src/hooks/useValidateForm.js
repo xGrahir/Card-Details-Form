@@ -25,7 +25,10 @@ export const useValidateForm = () => {
 	const checkCardNumberHandler = e => {
 		const reg = /^(?:\d[ -]*?){16}$/
 
-		const format = e.target.value.replaceAll(' ', '').replace(/(\w{4})/g, '$1 ').replace(/(^\s+|\s+$)/, '')
+		const format = e.target.value
+			.replaceAll(' ', '')
+			.replace(/(\w{4})/g, '$1 ')
+			.replace(/(^\s+|\s+$)/, '')
 
 		if (e.target.value.match(reg)) {
 			setIsValid(true)
@@ -38,9 +41,55 @@ export const useValidateForm = () => {
 		}
 	}
 
+	const checkMonthHandler = e => {
+		if (e.target.value <= 0 || e.target.value > 12) {
+			setIsValid(false)
+			return
+		}
+
+		if (e.target.value > 0) {
+			setIsValid(true)
+
+			if (e.target.value < 10) {
+				dispatch(dataActions.changeMonth(`0${e.target.value}`))
+			} else {
+				dispatch(dataActions.changeMonth(e.target.value))
+			}
+		}
+	}
+
+	const checkYearHandler = e => {
+		const year = new Date().getFullYear().toString().slice(2)
+
+		if (e.target.value < year) {
+			setIsValid(false)
+		} else {
+			setIsValid(true)
+			dispatch(dataActions.changeYear(e.target.value))
+		}
+	}
+
+	const checkCVCHandler = e => {
+		if (e.target.value < 100 || e.target.value > 999) {
+			setIsValid(false)
+		} else {
+			setIsValid(true)
+			dispatch(dataActions.changeCVC(e.target.value))
+		}
+	}
+
 	const isTouchedHandler = () => {
 		setIsTouched(true)
 	}
 
-	return { checkNameValid, isTouchedHandler, isTouched, isValid, checkCardNumberHandler }
+	return {
+		checkNameValid,
+		isTouchedHandler,
+		isTouched,
+		isValid,
+		checkCardNumberHandler,
+		checkMonthHandler,
+		checkYearHandler,
+		checkCVCHandler,
+	}
 }

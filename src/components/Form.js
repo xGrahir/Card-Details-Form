@@ -6,15 +6,36 @@ export const Inputs = () => {
 	const {
 		checkNameValid,
 		isTouched: nameIsTouched,
-		isValid: nameValid,
+		isValid: nameIsValid,
 		isTouchedHandler: isNameTouched,
 	} = useValidateForm()
 
 	const {
 		checkCardNumberHandler,
 		isTouched: numberIsTouched,
-		isValid: numberValid,
+		isValid: numberIsValid,
 		isTouchedHandler: isNumberTouched,
+	} = useValidateForm()
+
+	const {
+		checkMonthHandler,
+		isValid: monthIsValid,
+		isTouchedHandler: isMonthTouched,
+		isTouched: monthIsTouched,
+	} = useValidateForm()
+
+	const {
+		checkYearHandler,
+		isValid: yearIsValid,
+		isTouchedHandler: isYearTouched,
+		isTouched: yearIsTouched,
+	} = useValidateForm()
+
+	const {
+		checkCVCHandler, 
+		isValid: cvcIsValid,
+		isTouchedHandler: isCVCTouched,
+		isTouched: cvcIsTouched
 	} = useValidateForm()
 
 	return (
@@ -24,7 +45,7 @@ export const Inputs = () => {
 					Cardholder name
 				</label>
 				<input
-					className={nameIsTouched && !nameValid ? `${styles.input}  ${styles.error}` : `${styles.input}`}
+					className={nameIsTouched && !nameIsValid ? `${styles.input}  ${styles.error}` : `${styles.input}`}
 					type='text'
 					required
 					id='name'
@@ -33,14 +54,14 @@ export const Inputs = () => {
 					onChange={checkNameValid}
 					onBlur={isNameTouched}
 				/>
-				{nameIsTouched && !nameValid ? <p className={styles.errormsg}>Wrong name</p> : ''}
+				{nameIsTouched && !nameIsValid ? <p className={styles.errormsg}>Wrong name</p> : ''}
 			</div>
 			<div className={styles['form-input']}>
 				<label className={styles.label} htmlFor='cardnumber'>
 					Card number
 				</label>
 				<input
-					className={numberIsTouched && !numberValid ? `${styles.input}  ${styles.error}` : `${styles.input}`}
+					className={numberIsTouched && !numberIsValid ? `${styles.input}  ${styles.error}` : `${styles.input}`}
 					type='text'
 					required
 					id='cardumber'
@@ -50,7 +71,7 @@ export const Inputs = () => {
 					onChange={checkCardNumberHandler}
 					onBlur={isNumberTouched}
 				/>
-				{numberIsTouched && !numberValid ? <p className={styles.errormsg}>Wrong number</p> : ''}
+				{numberIsTouched && !numberIsValid ? <p className={styles.errormsg}>Wrong number</p> : ''}
 			</div>
 
 			<div className={styles['about-card']}>
@@ -59,36 +80,63 @@ export const Inputs = () => {
 						EXP. DATE (MM/YY)
 					</label>
 					<div className={styles.exp}>
-						<input
-							className={`${styles.input} ${styles['exp-input']}`}
-							type='text'
-							required
-							id='month'
-							name='month'
-							placeholder='MM'
-						/>
-						<input
-							className={`${styles.input} ${styles['exp-input']}`}
-							type='text'
-							required
-							id='month'
-							name='month'
-							placeholder='DD'
-						/>
+						<div className={styles.exp2}>
+							<input
+								className={
+									monthIsTouched && !monthIsValid
+										? `${styles.input} ${styles['exp-input']}  ${styles.error}`
+										: `${styles.input} ${styles['exp-input']}`
+								}
+								type='text'
+								required
+								id='month'
+								name='month'
+								placeholder='MM'
+								onChange={checkMonthHandler}
+								onBlur={isMonthTouched}
+							/>
+							{monthIsTouched && !monthIsValid ? <p className={styles.errormsg}>Wrong month</p> : ''}
+						</div>
+						<div className={styles.exp2}>
+							<input
+								className={
+									yearIsTouched && !yearIsValid
+										? `${styles.input} ${styles['exp-input']}  ${styles.error}`
+										: `${styles.input} ${styles['exp-input']}`
+								}
+								type='text'
+								required
+								id='month'
+								name='month'
+								placeholder='YY'
+								onChange={checkYearHandler}
+								onBlur={isYearTouched}
+							/>
+							{yearIsTouched && !yearIsValid ? <p className={styles.errormsg}>Wrong year</p> : ''}
+						</div>
 					</div>
 				</div>
 				<div className={`${styles['form-input']} ${styles.cvc}`}>
 					<label className={styles.label} htmlFor='cvc'>
 						CVC
 					</label>
-					<input
-						className={`${styles.input} ${styles['cvc-input']}`}
-						type='text'
-						required
-						id='cvc'
-						name='cvc'
-						placeholder='e.g. 123'
-					/>
+					<div className={styles.exp2}>
+						<input
+							className={
+								cvcIsTouched && !cvcIsValid
+									? `${styles.input} ${styles['cvc-input']}  ${styles.error}`
+									: `${styles.input} ${styles['cvc-input']}`
+							}
+							type='text'
+							required
+							id='cvc'
+							name='cvc'
+							placeholder='e.g. 123'
+							onChange={checkCVCHandler}
+							onBlur={isCVCTouched}
+						/>
+						{cvcIsTouched && !cvcIsValid ? <p className={styles.errormsg}>Wrong CVC</p> : ''}
+					</div>
 				</div>
 			</div>
 			<div className={styles.button}>
